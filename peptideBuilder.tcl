@@ -81,6 +81,10 @@ namespace eval ::peptideBuilder:: {
 	}
 	
 	proc ::peptideBuilder::build_full {fname} {
+		#This function builds a peptide from the list of amino acid and backbone torsional angles
+		#Parameters:
+		#	fname: path to file containing sequence and torsional agnles
+		#		format: VAL -57 -47
 		set fp [open $fname r]
 		set data [split [read $fp] "\n"]
 		set atoms [list]
@@ -101,6 +105,10 @@ namespace eval ::peptideBuilder:: {
 	}
 	
 	proc ::peptideBuilder::build_ideal {fname} {
+		#This function builds a peptide from its sequence amino acid and backbone secondary sturcture (ideal torsional angles)
+		#Parameters:
+		#	fname: path to file containing sequence and secondary structure
+		#		format: h,ADFGEDT
 		variable a2aaa
 		variable ideal_ss
 	
@@ -135,7 +143,18 @@ namespace eval ::peptideBuilder:: {
 		return $atoms
 	}
 	proc ::peptideBuilder::build_backbone {atoms phi psi resname resid} {
-		#atoms: name resname x y z
+		#This function initializes all the propreties of an atom (name, resname, resid, coordinates)
+		#The cartisian coordinates are computed from the internal coordinates.
+		#Parameters:
+		#	atoms: list previously built atoms [name, resname, resid, x, y, z]
+		#	phi: torsional angle (degrees)
+		#	psi: torsional angle (degrees)
+		#	resname: name of amino acid (three letter code)
+		#	resid: residue number of amino acid (int)
+		#Returns:
+		#	atoms: list of atoms with new atom added
+		#
+		
 		#If atoms is empty, initialise 
 		if {[llength $atoms] == 0} {
 			set N_ {0 0 0}
