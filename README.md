@@ -21,7 +21,7 @@ GLY -57 -47
 ```
 Running it in VMD:
 ```
-packae require peptideBuilder
+package require peptideBuilder
 ::peptideBuilder::build_peptide peptide.dat ideal
-::peptideBuilder::build_full peptide_full.dat full
+::peptideBuilder::build_peptide peptide_full.dat full
 ```
